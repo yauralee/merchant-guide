@@ -1,0 +1,23 @@
+canRepeateThreeTimes:
+  - I
+  - X
+  - C
+  - M
+canNeverBeRepeated:
+ - D
+ - L
+ - V
+CanBeSubtractedFrom:
+ - I:
+   - V
+   - X
+ - X:
+   - L
+   - C
+ - C:
+   - D
+   - M
+ - V : null
+ - D : null
+ - L : null
+
