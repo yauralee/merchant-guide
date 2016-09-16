@@ -1,0 +1,35 @@
+I :
+  - value : 1
+  - repeatTimes : 3
+  - minuend :
+    - V
+    - X
+V :
+  - value : 5
+  - repeatTimes : 0
+  - minuend : null
+X :
+  - value : 10
+  - repeatTimes : 3
+  - minuend :
+    - L
+    - C
+L :
+  - value : 50
+  - repeatTimes : 0
+  - minuend : null
+C :
+  - value : 100
+  - repeatTimes : 3
+  - minuend :
+    - D
+    - M
+D :
+  - value : 500
+  - repeatTimes : 0
+  - minuend : null
+M :
+  - value : 1000
+  - repeatTimes : 3
+  - minuend : null
+

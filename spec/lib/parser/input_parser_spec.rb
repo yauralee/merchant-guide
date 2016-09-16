@@ -2,12 +2,19 @@ require 'parser/input_parser'
 
 RSpec.describe InputParser, type: :parser do
   let(:input_parser) {InputParser.new}
-  describe '#corresponding_symbol_and_value' do
-    context 'with symbols and values' do
-      it 'should return the value of symbols' do
-        file_name = 'resource/corresponding_symbol_and_value.yml'
-        symbols_and_values = {'I' => 1, 'V' => 5, 'X' => 10, 'L' => 50, 'C' => 100, 'D' => 500, 'M' => 1000}
-        expect(input_parser.yaml_parser(file_name)).to eq(symbols_and_values)
+  describe '#symbols_attributes' do
+    context 'with symbols attributes' do
+      it 'should return symbols as hash' do
+        file_name = 'resource/symbols_attributes.yml'
+        symbols = {"C" => [{"value"=>100}, {"repeatTimes"=>3}, {"minuend"=>["D", "M"]}],
+                   "D" => [{"value"=>500}, {"repeatTimes"=>0}, {"minuend"=>nil}],
+                   "I" => [{"value"=>1}, {"repeatTimes"=>3}, {"minuend"=>["V", "X"]}],
+                   "L" => [{"value"=>50}, {"repeatTimes"=>0}, {"minuend"=>nil}],
+                   "M" => [{"value"=>1000}, {"repeatTimes"=>3}, {"minuend"=>nil}],
+                   "V" => [{"value"=>5}, {"repeateTimes"=>0}, {"minuend"=>nil}],
+                   "V" => [{"value"=>5}, {"repeatTimes"=>0}, {"minuend"=>nil}],
+                   "X" => [{"value"=>10}, {"repeatTimes"=>3}, {"minuend"=>["L", "C"]}]}
+        expect(input_parser.yaml_parser(file_name)).to eq(symbols)
       end
     end
   end
@@ -21,18 +28,6 @@ RSpec.describe InputParser, type: :parser do
                       "transaction2" => ["glob prok", "Gold", "57800 Credits"],
                       "transaction3" => ["pish pish", "Iron", "3910 Credits"]}
         expect(input_parser.yaml_parser(file_name)).to eq(conditions)
-      end
-    end
-  end
-
-  describe '#symbol_features' do
-    context 'with features of symbols' do
-      it 'should return repeate times and minuend of symbols' do
-        file_name = 'resource/symbol_features.yml'
-        features = {"CanBeSubtractedFrom" => [{"I"=>["V", "X"]}, {"X"=>["L", "C"]}, {"C"=>["D", "M"]}, {"V"=>nil}, {"D"=>nil}, {"L"=>nil}],
-                    "canNeverBeRepeated" => ["D", "L", "V"],
-                    "canRepeateThreeTimes" => ["I", "X", "C", "M"]}
-        expect(input_parser.yaml_parser(file_name)).to eq(features)
       end
     end
   end
