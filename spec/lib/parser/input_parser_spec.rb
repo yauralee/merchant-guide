@@ -2,18 +2,17 @@ require 'parser/input_parser'
 
 RSpec.describe InputParser, type: :parser do
   let(:input_parser) {InputParser.new}
-  describe '#symbols_attributes' do
+  describe '#latin_symbols_attributes' do
     context 'with symbols attributes' do
       it 'should return symbols as hash' do
-        file_name = 'resource/symbols_attributes.yml'
-        symbols = {"C" => [{"value"=>100}, {"repeatTimes"=>3}, {"minuend"=>["D", "M"]}],
-                   "D" => [{"value"=>500}, {"repeatTimes"=>0}, {"minuend"=>nil}],
-                   "I" => [{"value"=>1}, {"repeatTimes"=>3}, {"minuend"=>["V", "X"]}],
-                   "L" => [{"value"=>50}, {"repeatTimes"=>0}, {"minuend"=>nil}],
-                   "M" => [{"value"=>1000}, {"repeatTimes"=>3}, {"minuend"=>nil}],
-                   "V" => [{"value"=>5}, {"repeateTimes"=>0}, {"minuend"=>nil}],
-                   "V" => [{"value"=>5}, {"repeatTimes"=>0}, {"minuend"=>nil}],
-                   "X" => [{"value"=>10}, {"repeatTimes"=>3}, {"minuend"=>["L", "C"]}]}
+        file_name = 'resource/latin_symbols_attributes.yml'
+        symbols = [{"I"=>[{"value"=>1}, {"repeatTimes"=>3}, {"minuend"=>["V", "X"]}]},
+                   {"V"=>[{"value"=>5}, {"repeatTimes"=>0}, {"minuend"=>nil}]},
+                   {"X"=>[{"value"=>10}, {"repeatTimes"=>3}, {"minuend"=>["L", "C"]}]},
+                   {"L"=>[{"value"=>50}, {"repeatTimes"=>0}, {"minuend"=>nil}]},
+                   {"C"=>[{"value"=>100}, {"repeatTimes"=>3}, {"minuend"=>["D", "M"]}]},
+                   {"D"=>[{"value"=>500}, {"repeatTimes"=>0}, {"minuend"=>nil}]},
+                   {"M"=>[{"value"=>1000}, {"repeatTimes"=>3}, {"minuend"=>nil}]}]
         expect(input_parser.yaml_parser(file_name)).to eq(symbols)
       end
     end
@@ -23,7 +22,7 @@ RSpec.describe InputParser, type: :parser do
     context 'with known conditions' do
       it 'should return equivalent and transactions' do
         file_name = 'resource/known_conditions.yml'
-        conditions = {"equivalent" => [{"glob"=>"I"}, {"prok"=>"V"}, {"pish"=>"X"}, {"tegj"=>"L"}],
+        conditions = {"equivalents" => [{"glob"=>"I"}, {"prok"=>"V"}, {"pish"=>"X"}, {"tegj"=>"L"}],
                       "transaction1" => ["glob glob", "Silver", "34 Credits"],
                       "transaction2" => ["glob prok", "Gold", "57800 Credits"],
                       "transaction3" => ["pish pish", "Iron", "3910 Credits"]}

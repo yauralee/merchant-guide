@@ -1,18 +1,13 @@
-equivalent:
-   - glob : I
-   - prok : V
-   - pish : X
-   - tegj : L
-transaction1:
-   - glob glob
+- transaction1:
+   - II
    - Silver
    - 34 Credits
-transaction2:
-   - glob prok
+- transaction2:
+   - IV
    - Gold
    - 57800 Credits
-transaction3:
-   - pish pish
+- transaction3:
+   - XX
    - Iron
    - 3910 Credits
 
