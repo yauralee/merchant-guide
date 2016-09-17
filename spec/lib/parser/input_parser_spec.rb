@@ -21,11 +21,10 @@ RSpec.describe InputParser, type: :parser do
   describe '#known_conditions' do
     context 'with known conditions' do
       it 'should return equivalent and transactions' do
-        file_name = 'resource/known_conditions.yml'
-        conditions = {"equivalents" => [{"glob"=>"I"}, {"prok"=>"V"}, {"pish"=>"X"}, {"tegj"=>"L"}],
-                      "transaction1" => ["glob glob", "Silver", "34 Credits"],
-                      "transaction2" => ["glob prok", "Gold", "57800 Credits"],
-                      "transaction3" => ["pish pish", "Iron", "3910 Credits"]}
+        file_name = 'resource/known_transactions.yml'
+        conditions = [{"Silver"=>[{"amountSymbols"=>"II"}, {"credits"=>34}]},
+                      {"Gold"=>[{"amountSymbols"=>"IV"}, {"credits"=>57800}]},
+                      {"Iron"=>[{"amountSymbols"=>"XX"}, {"credits"=>3910}]}]
         expect(input_parser.yaml_parser(file_name)).to eq(conditions)
       end
     end
@@ -35,9 +34,9 @@ RSpec.describe InputParser, type: :parser do
     context 'with questions' do
       it 'should return details of questions' do
         file_name = 'resource/questions.yml'
-        questions = {"how many Credits" => [{"glob prok"=>"Silver"}, {"glob prok"=>"Gold"}, {"glob prok"=>"Iron"}],
-                     "how much is" => ["pish tegj glob glob"],
-                     "how much wood" => ["could a woodchuck chuck if a woodchuck could chuck wood"]}
+        questions = {"how much is"=>["XLII"],
+                     "how many Credits"=>[{"IV"=>"Silver"}, {"IV"=>"Gold"}, {"IV"=>"Iron"}],
+                     "how much wood"=>["could a woodchuck chuck if a woodchuck could chuck wood"]}
         expect(input_parser.yaml_parser(file_name)).to eq(questions)
       end
     end
