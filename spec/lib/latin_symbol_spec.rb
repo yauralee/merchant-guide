@@ -39,17 +39,4 @@ RSpec.describe Symbol do
       end
     end
   end
-
-  describe '#symbols_to_value' do
-    context 'when given symbol string' do
-      it 'should return the value of the string' do
-        symbol_string =  'MCMXLIV'
-        expect(LatinSymbol.symbols_to_value(symbol_string, symbols_attributes)).to eq(1944)
-      end
-      it 'should return the value of the string' do
-        symbol_string =  'MMVI'
-        expect(LatinSymbol.symbols_to_value(symbol_string, symbols_attributes)).to eq(2006)
-      end
-    end
-  end
 end

@@ -36,7 +36,7 @@ RSpec.describe InputParser, type: :parser do
         file_name = 'resource/questions.yml'
         questions = {"how much is"=>["XLII"],
                      "how many Credits"=>[{"IV"=>"Silver"}, {"IV"=>"Gold"}, {"IV"=>"Iron"}],
-                     "how much wood"=>["could a woodchuck chuck if a woodchuck could chuck wood"]}
+                     "how much" => [{"wood"=>"could a woodchuck chuck if a woodchuck could chuck wood"}]}
         expect(input_parser.yaml_parser(file_name)).to eq(questions)
       end
     end
