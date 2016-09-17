@@ -19,8 +19,8 @@ RSpec.describe InputParser, type: :parser do
   end
 
   describe '#known_conditions' do
-    context 'with known conditions' do
-      it 'should return equivalent and transactions' do
+    context 'with known transactions' do
+      it 'should return transactions details as hash' do
         file_name = 'resource/known_transactions.yml'
         conditions = [{"Silver"=>[{"amountSymbols"=>"II"}, {"credits"=>34}]},
                       {"Gold"=>[{"amountSymbols"=>"IV"}, {"credits"=>57800}]},

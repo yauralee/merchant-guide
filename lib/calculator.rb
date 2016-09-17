@@ -1,4 +1,4 @@
-require 'latin_symbol'
+require '../lib/latin_symbol'
 
 class Calculator
 
@@ -15,15 +15,22 @@ class Calculator
     @metals_prices = metals_prices
   end
 
-  def self.calculate_results(questions, symbols_attributes)
-    # questions.each do |question|
-    #   if question.keys[0] == 'how much is'
-    #     Calculator.symbols_to_value(question.values[0], symbols_attributes)
-    #     elsif question.keys[0] == 'how many Credits'
-    #   end
-    # end
-    Calculator.send(symbols_attributes, questions['how much is'][0], )
-
+  def self.calculate_results(questions, symbols_attributes, known_transactions)
+    result_array = []
+    questions.values.each do |each_kind_question|
+      each_kind_question.each do |each_question|
+        params_for_send  = [each_question, symbols_attributes]
+        if questions.key(each_kind_question) == 'how much is'
+          result = Calculator.send(:symbols_to_value, *params_for_send)
+        elsif questions.key(each_kind_question) == 'how many Credits'
+          result = Calculator.new(known_transactions, symbols_attributes).send(:metal_total_price, *params_for_send)
+        else
+          result =  Calculator.send(:have_no_idea, each_question)
+        end
+        result_array << result
+      end
+    end
+    result_array
   end
 
   def self.symbols_to_value(symbols, symbols_attributes)
@@ -54,7 +61,7 @@ class Calculator
     @metals_prices[amountSymbols_and_metal.values[0]] * amount_value
   end
 
-  def have_no_idea(product_and_condition)
+  def self.have_no_idea(product_and_condition)
     'I have no idea what you are talking about' unless['Silver', 'Gold', 'Iron'].include?(product_and_condition.keys[0])
   end
 end

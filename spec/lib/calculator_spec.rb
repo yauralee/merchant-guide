@@ -6,11 +6,21 @@ RSpec.describe Calculator do
   let(:known_transactions) {input_parser.yaml_parser('resource/known_transactions.yml')}
   let(:symbols_attributes) {input_parser.yaml_parser('resource/latin_symbols_attributes.yml')}
   let(:calculator) {Calculator.new(known_transactions, symbols_attributes)}
+  let(:questions) {input_parser.yaml_parser('resource/questions.yml')}
   describe '#initialize' do
     context 'with known transactions and symbols attributes' do
       it 'should return calculator instance with metal price as attribute' do
         metals_prices = {"Silver"=>17.0, "Gold"=>14450.0, "Iron"=>195.5}
         expect(Calculator.new(known_transactions, symbols_attributes).metals_prices).to eq(metals_prices)
+      end
+    end
+  end
+
+  describe '#calculate_results' do
+    context 'with questions' do
+      it 'should return result array' do
+        result_array = [42, 68.0, 57800.0, 782.0, "I have no idea what you are talking about"]
+        expect(Calculator.calculate_results(questions, symbols_attributes, known_transactions)).to eq(result_array)
       end
     end
   end
